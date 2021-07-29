@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Richard Kidwell Project 2</title>
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+  <script type="text/javascript" src="glMatrix-0.9.5.min.js"></script>
+
+  <!--  ************** Fragment Shader ************* -->
+  <script id="shader-fs" type="x-shader/x-fragment">
+    precision mediump float;
+varying vec4 vColor; 
+
+void main(void) {
+        gl_FragColor = vColor; 
+    }
+</script>
+
+  <!--  ************** Vertex Shader ************* -->
+  <script id="shader-vs" type="x-shader/x-vertex">
+
+    attribute vec3 aVertexPosition;
+    attribute vec4 aVertexColor;
+    varying vec4 vColor;
+
+    uniform mat4 uMVMatrix;
+
+    void main(void) {
+
+      gl_PointSize = 10.0; 
+      gl_Position = uMVMatrix*vec4(aVertexPosition, 1.0);
+
+      vColor = aVertexColor; 
+    }
+</script>
+
+
+  <script type="text/javascript" src="shaders_setup.js"></script>
+  <script type="text/javascript" src="code06.js"></script>
+
+
+</head>
+
+
+<body onload="webGLStart();">
+
+  <canvas id="code04-canvas" style="border:none;" width="700" height="700"></canvas>
+
+
+  <h4> Geometry: </h4>
+  <button onclick="obj(1)"> Circle Node 1</button>
+  <button onclick="obj(2)"> Circle Node 2</button>
+  <button onclick="obj(3)"> Circle Node 3</button>
+  <button onclick="obj(4)"> Triangle Node 1</button>
+  <button onclick="obj(5)"> Triangle Node 2</button>
+  <button onclick="obj(6)"> Triangle Node 3</button>
+
+
+
+
+
+  <h4>
+    - Click on the left mouse button and move the cursor to rotate selected node.<br>
+    - Q translates the node out, A translates the node in. This also scales the arm for circle nodes.<br>
+    - E will scale the triangle nodes outwards, D scales them inwards.<br>
+    - W zooms in, S zooms out.<br>
+    - F moves the entity forward, B moves it backwards, L moves it to the left, R moves it to the right.<br>
+  </h4>
+
+  </h4>
+  <button onclick="redraw()"> Go Back </button>
+  </div>
+
+  <footer>
+    <center>
+      <p> Created by Richard Kidwell</p>
+    </center>
+  </footer>
+
+</body>
+
+
+</html>

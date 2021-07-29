@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <title>Richard Kidwell - Project 1 </title>
+  <!-- Declares styles for the 2 canvasses -->
+  <style>
+    .textCanvas {
+      position: relative;
+    }
+
+    #project1Text {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      z-index: 10;
+      border: none;
+    }
+  </style>
+
+  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+
+  <!--  ************** Fragment Shader ************* -->
+  <script id="shader-fs" type="x-shader/x-fragment">
+    precision mediump float;
+varying vec4 vColor; 
+
+void main(void) {
+        gl_FragColor = vColor; 
+    }
+</script>
+
+  <!--  ************** Vertex Shader ************* -->
+  <script id="shader-vs" type="x-shader/x-vertex">
+
+    attribute vec3 aVertexPosition;
+	attribute vec4 aVertexColor;
+	varying vec4 vColor; 
+
+
+    void main(void) {
+
+      gl_Position = vec4(aVertexPosition, 1.0);
+      vColor = aVertexColor; 
+
+    }
+</script>
+
+
+  <script type="text/javascript" src="shaders_setup.js"></script>
+  <script type="text/javascript" src="Project1Code.js"></script>
+  <script type="text/javascript" src="ProjectCSV.js"></script>
+
+
+</head>
+
+
+<body onload="webGLStart();">
+  <!-- declare 2 canvasses, one for GL data, one for text data -->
+  <div class="TextCanvas">
+    <canvas id="project1Canvas" style="border:none;left: 10px;top: 10px;" width="700" height="700"></canvas>
+    <canvas id="project1Text" width="700" height="700"></canvas>
+  </div>
+
+
+  <h4>
+    Click to draw graphs!
+  </h4>
+
+  <!-- Declares buttons which will generate graphs -->
+  <button onclick="csv_draw_type('Setosa')"> Setosa Averages </button>
+  <button onclick="csv_draw_type('Versicolor')"> Versicolor Averages </button>
+  <button onclick="csv_draw_type('Virginica')"> Virginica Averages </button>
+  <button onclick="csv_draw_all()"> Draw All </button>
+
+  <!-- courtesy:
+ http://mounirmesselmeni.github.io/2012/11/20/reading-csv-file-with-javascript-and-html5-file-api/  -->
+  <div>
+    <form class="form-horizontal well">
+      <legend>
+        <h3>
+          <div id="title">HTML5 File API</div>
+        </h3>
+      </legend>
+      <fieldset>
+        <label for="csvFileInput"> <strong>CSV File:</strong>
+        </label>
+        <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv">
+  </div>
+  </fieldset>
+  </form>
+  <div id="output">
+  </div>
+  </div>
+
+
+  <br>
+  <br>
+  <footer>
+    <center>
+      <p>Richard Kidwell' Lab 1</p>
+    </center>
+  </footer>
+
+  <!-- Le javascript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="read-csv.js"></script>
+
+
+
+
+
+
+  <br />
+
+</body>
+
+
+</html>
